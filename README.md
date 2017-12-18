@@ -1,2 +1,4 @@
 # faz-backup-mysql
-script para rodar o mysqldump
+Script simples para rodar o mysqldump
+
+Escreve os arquivos de backup separados em um diretorio
