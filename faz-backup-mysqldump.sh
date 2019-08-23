@@ -8,6 +8,7 @@
 
 CONF=config.txt
 if test -f "$CONF"; then
+	source $CONF
 	echo "Executando dump em $DIRBACKUP/$DATA"
 	mkdir -p $DIRBACKUP/$DATA
 	for d in $DATABASES;
