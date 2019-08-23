@@ -6,15 +6,24 @@
 # mysql -u <usuario> -p<senha> < mysql.sql
 # sidney - 18/12/2017
 
-source ./config.txt
+CONF=config.txt
+if test -f "$CONF"; then
+	echo "Executando dump em $DIRBACKUP/$DATA"
+	mkdir -p $DIRBACKUP/$DATA
+	for d in $DATABASES;
+	do
+		echo "Backup de $d"
+		if $TEMSENHA;then
+			$MYSQLDUMP -u $USER -p$PASS $d > $DIRBACKUP/$DATA/$d.dump
+		else
+			$MYSQLDUMP $d > $DIRBACKUP/$DATA/$d.dump
+		fi
+	done
 
-echo "Executando dump em $DIRBACKUP/$DATA"
-mkdir -p $DIRBACKUP/$DATA
-for d in $DATABASES;
-do
-	echo "Backup de $d"
-	$MYSQLDUMP -u $ADMIN -p$PASS $d > $DIRBACKUP/$DATA/$d.dump
-done
+	echo "Removendo entradas antigas"
+	$FIND $DIRBACKUP -type d -ctime +$DIAS -exec rm -rf {} \; 
+else
+	echo "O arquivo $CONF nao existe"
+	echo "Copie o arquivo config.txt.sample para config.txt e realize os ajustes necessarios."
+fi
 
-echo "Removendo entradas antigas"
-$FIND $DIRBACKUP -type d -ctime +$DIAS -exec rm -rf {} \; 

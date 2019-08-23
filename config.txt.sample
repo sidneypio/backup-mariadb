@@ -4,5 +4,6 @@ DATA=`/bin/date +%Y%m%d-%H%M%S`
 MYSQLDUMP=/usr/bin/mysqldump
 DATABASES="mysql"
 DIAS="30"
-ADMIN="usuario-do-banco"
+TEMSENHA=true
+USER="usuario-do-banco"
 PASS="senha-do-banco"
